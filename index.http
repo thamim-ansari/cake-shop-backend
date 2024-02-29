@@ -1,0 +1,3 @@
+GET http://localhost:3001/cakes/
+###
+GET http://localhost:3001/cakes/?search_q=c&cake_type=cup cake,cake,
