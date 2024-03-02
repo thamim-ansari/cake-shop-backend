@@ -33,11 +33,19 @@ app.get("/cakes/", async (request, response) => {
     search_q = "",
     order_by = "id",
     order = "ASC",
-    cake_type = "cake,cup cake",
+    cake_type = "",
   } = request.query;
   const cakeTypeArray = cake_type.split(",").map((item) => item.trim());
   const cakeTypeString = cakeTypeArray.map((item) => `"${item}"`).join(", ");
-  const getCakesQuery = `
+  const getCakesQuery =
+    cake_type === ""
+      ? `SELECT
+      *
+    FROM
+      cake_data
+      WHERE name LIKE '%${search_q}%'
+    ORDER BY ${order_by} ${order}`
+      : `
     SELECT
       *
     FROM
